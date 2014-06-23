@@ -13,7 +13,7 @@ class Config(object):
     CELERY_TASK_SERIALIZER = 'json'
     CELERY_RESULT_SERIALIZER = 'json'
     ADMINS = (
-        ('Balthazar Rouberol', 'balthazar@mapado.com'),
+        ('Balthazar Rouberol', 'brouberol@imap.cc'),
     )
 
 app = Celery(
