@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from celery import Celery
+from kombu import Exchange, Queue
 
 
 class Config(object):
@@ -15,12 +16,17 @@ class Config(object):
     ADMINS = (
         ('Balthazar Rouberol', 'brouberol@imap.cc'),
     )
+    CELERY_DEFAULT_QUEUE = 'celeryex'
+    CELERY_QUEUES = (
+        Queue('celeryex', Exchange('celeryex'), routing_key='celeryex'),
+    )
 
 app = Celery(
     'tasks',
     include=[
         'celeryex.tasks.time',
         'celeryex.tasks.image',
+        'celeryex.tasks.chain'
     ]
 )
 app.config_from_object(Config)
